@@ -1,0 +1,134 @@
+---
+title: "highlightword Example"
+format:
+  revealjs:
+    footer: <https://github.com/emilhvitfeldt/quarto-revealjs-highlightword>
+revealjs-plugins:
+  - highlightword
+knitr: true
+code-overflow: wrap
+code-line-numbers: false
+---
+
+## Simple usage
+
+Adding a fenced with with `.fragment .highlightword` and the `word` you need, plus what any valid CSS `style` you want applied.
+The following div added to this slide
+
+````` {.markdown style="font-size:0.75em;"}
+::: {.fragment .highlightword word="LinearRegression()" style="background:yellow;"}
+:::
+`````
+
+::: {.fragment .highlightword word="LinearRegression()" number=1 chunk=2 style="background:yellow;"}
+:::
+
+will highlight like so when slides are advanced:
+
+```{python}
+#| eval: false
+#| echo: true
+from vetiver import VetiverModel
+from vetiver.data import mtcars
+from sklearn.linear_model import LinearRegression
+
+model = LinearRegression().fit(mtcars.drop(columns="mpg"), mtcars["mpg"])
+v = VetiverModel(model, model_name = "cars_linear", 
+                 prototype_data = mtcars.drop(columns="mpg"))
+v.description
+```
+
+## Number argument
+
+The first instance of the word will be matched by default. Set `number` argument to change that
+
+````` {.markdown style="font-size:0.75em;"}
+::: {.fragment .highlightword word="VetiverModel" number=2 style="background:yellow;"}
+:::
+`````
+
+::: {.fragment .highlightword word="VetiverModel" number=2 chunk=2 style="background:yellow;"}
+:::
+
+to have the second instance highlighted
+
+```{python}
+#| eval: false
+#| echo: true
+from vetiver import VetiverModel
+from vetiver.data import mtcars
+from sklearn.linear_model import LinearRegression
+
+model = LinearRegression().fit(mtcars.drop(columns="mpg"), mtcars["mpg"])
+v = VetiverModel(model, model_name = "cars_linear", 
+                 prototype_data = mtcars.drop(columns="mpg"))
+v.description
+```
+
+
+## chunk argument
+
+The first code chunk will be search by default. 
+
+````` {.markdown style="font-size:0.75em;"}
+::: {.fragment .highlightword word="VetiverModel" chunk=2 style="background:yellow;"}
+:::
+`````
+
+::: {.fragment .highlightword word="VetiverModel" chunk=3 style="background:yellow;"}
+:::
+
+chunk 1: Set `chunk` argument to change that.
+
+```{python}
+#| eval: false
+#| echo: true
+from vetiver import VetiverModel
+from vetiver.data import mtcars
+from sklearn.linear_model import LinearRegression
+```
+
+chunk 2: 
+notice that we didn't set `number=2` since this is the first instance of the word in this chunk.
+
+```{python}
+#| eval: false
+#| echo: true
+model = LinearRegression().fit(mtcars.drop(columns="mpg"), mtcars["mpg"])
+v = VetiverModel(model, model_name = "cars_linear", 
+                 prototype_data = mtcars.drop(columns="mpg"))
+v.description
+```
+
+## fragments
+
+This highlighting is still [revealjs fragments](https://quarto.org/docs/presentations/revealjs/advanced.html#fragments), so can change the ordering as well
+
+````` {.markdown style="font-size:0.75em;"}
+::: {.fragment .highlightword fragment-index=1 word="VetiverModel" number=2 style="background:yellow;"}
+:::
+
+::: {.fragment .highlightword fragment-index=1 word="v.description" number=1 style="background:pink;"}
+:::
+`````
+
+::: {.fragment .highlightword fragment-index=1 word="VetiverModel" number=2 chunk=2 style="background:yellow;"}
+:::
+
+::: {.fragment .highlightword fragment-index=1 word="v.description" number=1 chunk=2 style="background:pink;"}
+:::
+
+To make things out of order, or the same time
+
+```{python}
+#| eval: false
+#| echo: true
+from vetiver import VetiverModel
+from vetiver.data import mtcars
+from sklearn.linear_model import LinearRegression
+
+model = LinearRegression().fit(mtcars.drop(columns="mpg"), mtcars["mpg"])
+v = VetiverModel(model, model_name = "cars_linear", 
+                 prototype_data = mtcars.drop(columns="mpg"))
+v.description
+```
