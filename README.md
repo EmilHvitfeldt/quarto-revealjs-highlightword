@@ -4,6 +4,10 @@ Revealjs plugin to highlight specific parts of code.
 
 ![](example.gif)
 
+I don't intend to add more functionality to this project other than fixing bugs. 
+
+There is a need for a more general highlighting plugin that works across multiple words (this plugin doesn't allow you to highlight two parts of code that is styled differently by the highligter.) 
+
 ## Installing
 
 ```bash
