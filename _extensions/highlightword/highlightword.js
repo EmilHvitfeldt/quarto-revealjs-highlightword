@@ -1,8 +1,8 @@
 window.RevealHighlightword= function () {
   return {
-    id: "RevealCodewindow",
+    id: "RevealHighlightword",
     init: function(deck) {
-      initCodewindow(deck);
+      initHighlightword(deck);
     }
   };
 };
@@ -70,7 +70,7 @@ const highlight_reverse = function(fragment) {
   }
 }
 
-const initCodewindow = function(window) {
+const initHighlightword = function(window) {
   window.on( 'fragmentshown', event => {
     event.fragments.forEach(highlight_apply);
   });
